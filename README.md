@@ -1,1 +1,0 @@
-# yureka-go-gin-api
