@@ -21,9 +21,9 @@ type authService struct {
 	userRepository repository.UserRepository
 }
 
-func NewAuthService(userRepos repository.UserRepository) AuthService {
+func NewAuthService(userRepository repository.UserRepository) AuthService {
 	return &authService{
-		userRepository: userRepos,
+		userRepository: userRepository,
 	}
 }
 

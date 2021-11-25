@@ -37,9 +37,9 @@ func (db *userConnection) UpdateUser(user entity.User) entity.User {
 	if user.Password != "" {
 		user.Password = hashAndSalt([]byte(user.Password))
 	} else {
-		var tempuser entity.User
-		db.connection.Find(&tempuser, user.ID)
-		user.Password = tempuser.Password
+		var existUser entity.User
+		db.connection.Find(&existUser, user.ID)
+		user.Password = existUser.Password
 	}
 	db.connection.Save(&user)
 	return user
