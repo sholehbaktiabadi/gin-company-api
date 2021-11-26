@@ -19,7 +19,7 @@ func ConnectDatabase() *gorm.DB {
 	if err != nil {
 		panic("Failed to connect databases")
 	}
-	db.AutoMigrate(&entity.Book{}, &entity.User{})
+	db.AutoMigrate(&entity.Company{}, &entity.User{})
 	return db
 }
 

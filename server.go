@@ -11,13 +11,16 @@ import (
 )
 
 var (
-	db             *gorm.DB                  = config.ConnectDatabase()
-	userRepository repository.UserRepository = repository.NewUserRepository(db)
-	jwtService     service.JWTService        = service.NewJWTService()
-	userService    service.UserService       = service.NewUserService(userRepository)
-	authService    service.AuthService       = service.NewAuthService(userRepository)
-	authController controller.AuthController = controller.NewAuthController(authService, jwtService)
-	userController controller.UserController = controller.NewUserController(userService, jwtService)
+	db                *gorm.DB                     = config.ConnectDatabase()
+	userRepository    repository.UserRepository    = repository.NewUserRepository(db)
+	companyRepository repository.CompanyRepository = repository.NewCompanyRespository(db)
+	jwtService        service.JWTService           = service.NewJWTService()
+	comapanyService   service.CompanyService       = service.NewCompanyService(companyRepository)
+	userService       service.UserService          = service.NewUserService(userRepository)
+	authService       service.AuthService          = service.NewAuthService(userRepository)
+	companyController controller.Companycontroller = controller.NewCompanyController(comapanyService, jwtService)
+	authController    controller.AuthController    = controller.NewAuthController(authService, jwtService)
+	userController    controller.UserController    = controller.NewUserController(userService, jwtService)
 )
 
 func main() {
@@ -33,6 +36,15 @@ func main() {
 	{
 		userRoutes.GET("/profile", userController.Profile)
 		userRoutes.PUT("/profile", userController.Update)
+	}
+
+	companyRoutes := r.Group("api/company", middleware.AuthorizeJwt(jwtService))
+	{
+		companyRoutes.GET("/", companyController.All)
+		companyRoutes.POST("/", companyController.Insert)
+		companyRoutes.GET("/:id", companyController.FindByID)
+		companyRoutes.PUT("/:user_id", companyController.Update)
+		companyRoutes.DELETE("/:id", companyController.Delete)
 	}
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
