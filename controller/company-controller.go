@@ -84,13 +84,11 @@ func (controller *companyController) Update(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, res)
 		return
 	}
-
 	auth := context.GetHeader("Authorization")
 	token, errToken := controller.jwtService.ValidateToken(auth)
 	if errToken != nil {
 		panic(errToken.Error())
 	}
-
 	claims := token.Claims.(jwt.MapClaims)
 	userID := fmt.Sprintf("%v", claims["user_id"])
 	fmt.Println(userID)

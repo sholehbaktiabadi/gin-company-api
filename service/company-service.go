@@ -66,7 +66,7 @@ func (service *companyService) FindByID(companyID uint64) entity.Company {
 
 func (service *companyService) IsAllowedToEdit(userID string, companyID uint64) bool {
 	company := service.companyRepository.FindCompanyByID(companyID)
-	id := fmt.Sprintf("%v", company.ID)
+	id := fmt.Sprintf("%v", company.UserID)
 	return userID == id
 
 }

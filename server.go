@@ -43,7 +43,7 @@ func main() {
 		companyRoutes.GET("/", companyController.All)
 		companyRoutes.POST("/", companyController.Insert)
 		companyRoutes.GET("/:id", companyController.FindByID)
-		companyRoutes.PUT("/:user_id", companyController.Update)
+		companyRoutes.PUT("/:id", companyController.Update)
 		companyRoutes.DELETE("/:id", companyController.Delete)
 	}
 	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
