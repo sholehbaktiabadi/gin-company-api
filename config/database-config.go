@@ -15,7 +15,6 @@ func ConnectDatabase() *gorm.DB {
 	if err != nil {
 		log.Fatal("cannot read env vars:", err)
 	}
-	println(env.DBHost, env.DBUser, env.DBPassword, env.DBName, env.DBPort)
 	dsn := fmt.Sprintf("host=%v user=%v password=%v dbname=%v port=%v sslmode=disable", env.DBHost, env.DBUser, env.DBPassword, env.DBName, env.DBPort)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {

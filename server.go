@@ -53,6 +53,5 @@ func main() {
 		companyRoutes.PUT("/:id", companyController.Update)
 		companyRoutes.DELETE("/:id", companyController.Delete)
 	}
-	println(env.DBHost, env.DBName)
 	r.Run(fmt.Sprintf(":%v", env.R_PORT)) // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
