@@ -1,6 +1,9 @@
 package main
 
 import (
+	"fmt"
+	"log"
+
 	"github.com/gin-gonic/gin"
 	"github.com/sholehbaktiabadi/go-api/config"
 	"github.com/sholehbaktiabadi/go-api/controller"
@@ -24,6 +27,10 @@ var (
 )
 
 func main() {
+	env, err := config.LoadConfig(".")
+	if err != nil {
+		log.Fatal("cannot read env vars:", err)
+	}
 	defer config.CloneConnection(db)
 	r := gin.Default()
 	authRoutes := r.Group("api/auth")
@@ -46,5 +53,6 @@ func main() {
 		companyRoutes.PUT("/:id", companyController.Update)
 		companyRoutes.DELETE("/:id", companyController.Delete)
 	}
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	println(env.DBHost, env.DBName)
+	r.Run(fmt.Sprintf(":%v", env.R_PORT)) // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }

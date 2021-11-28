@@ -1,6 +1,9 @@
 package config
 
 import (
+	"fmt"
+	"log"
+
 	"github.com/sholehbaktiabadi/go-api/entity"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -8,13 +11,12 @@ import (
 
 //Create Connection
 func ConnectDatabase() *gorm.DB {
-	// dbUser := os.Getenv("DB_USER")
-	// dbPassword := os.Getenv("DB_PASSWORD")
-	// dbName := os.Getenv("DB_NAME")
-	// dbHost := os.Getenv("DB_HOST")
-	// dbPort := os.Getenv("DB_PORT")
-
-	dsn := "host=localhost user=postgres password=root dbname=db_go_proper port=5432 sslmode=disable"
+	env, err := LoadConfig(".")
+	if err != nil {
+		log.Fatal("cannot read env vars:", err)
+	}
+	println(env.DBHost, env.DBUser, env.DBPassword, env.DBName, env.DBPort)
+	dsn := fmt.Sprintf("host=%v user=%v password=%v dbname=%v port=%v sslmode=disable", env.DBHost, env.DBUser, env.DBPassword, env.DBName, env.DBPort)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("Failed to connect databases")
