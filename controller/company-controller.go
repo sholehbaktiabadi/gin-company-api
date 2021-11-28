@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/sholehbaktiabadi/go-api/dto"
 	"github.com/sholehbaktiabadi/go-api/entity"
 	"github.com/sholehbaktiabadi/go-api/helper"

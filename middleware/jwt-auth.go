@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/sholehbaktiabadi/go-api/helper"
 	"github.com/sholehbaktiabadi/go-api/service"
 )
