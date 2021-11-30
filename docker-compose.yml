@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  points:
+    container_name: go-api
+    build: .
+    image: go-api:2.0
+    ports:
+      - "8080"
+    environment:
+      - SERVER_PORT=${SERVER_PORT:?err}
+      - DB_HOST=${DB_HOST:?err}
+      - DB_NAME=${DB_NAME:?err}
+      - DB_PORT=${DB_PORT:?err}
+      - DB_USER=${DB_USER:?err}
+      - DB_PASSWORD=${DB_PASSWORD:?err}
+      - JWT_SECRET=${JWT_SECRET:?err}
